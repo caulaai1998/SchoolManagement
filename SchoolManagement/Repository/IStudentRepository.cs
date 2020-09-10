@@ -7,16 +7,8 @@ using System.Threading.Tasks;
 
 namespace SchoolManagement.Repository
 {
-    public interface IStudentRepository
+    public interface IStudentRepository: IRepository<SinhVien>
     {
-       // Task<List<StudentViewModel>> GetStudents();
-
-        Task<StudentViewModel> GetStudent(int? studentId);
-
-        Task<int> AddStudent(SinhVien sinhVien);
-
-        Task<int> DeleteStudent(int? studentId);
-
-        Task UpdateStudent(SinhVien sinhVien);
+       
     }
 }

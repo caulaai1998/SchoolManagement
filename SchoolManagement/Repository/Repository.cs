@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SchoolManagement.DTO;
+using SchoolManagement.Repository.Entity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,45 +8,50 @@ using System.Threading.Tasks;
 
 namespace SchoolManagement.Repository
 {
-    public class Repository<T> : IRepository<T> where T : class
+    public class Repository<T, TContext> : IRepository<T>
+        where T : class,IEntity
+        where TContext : DB
     {
-        private DB db;
-        private DbSet<T> table = null;
-        public Repository(DB _db)
+        private readonly TContext context;
+
+        public Repository(TContext context)
         {
-            db = _db;
-            table = _db.Set<T>();
-        }
-        public void Delete(object id)
-        {
-            T existing = table.Find(id);
-            table.Remove(existing);
+            this.context = context;
         }
 
-        public IEnumerable<T> GetAll()
+        public async Task<T> Add(T entity)
         {
-            return table.ToList();
+            context.Set<T>().Add(entity);
+            await context.SaveChangesAsync();
+            return entity;
         }
 
-        public T GetById(object id)
+        public async Task<T> Delete(int id)
         {
-            return table.Find(id);
+            var entity = await context.Set<T>().FindAsync(id);
+            if (entity == null) return entity;
+
+            context.Set<T>().Remove(entity);
+            await context.SaveChangesAsync();
+
+            return entity;
         }
 
-        public void Insert(T obj)
+        public async Task<T> Get(int id)
         {
-            table.Add(obj);
+            return await context.Set<T>().FindAsync(id);
         }
 
-        public void Save()
+        public async Task<List<T>> GetAll()
         {
-            db.SaveChanges();
+            return await context.Set<T>().ToListAsync();
         }
 
-        public void Update(T obj)
+        public async Task<T> Update(T entity)
         {
-            table.Attach(obj);
-            db.Entry(obj).State = EntityState.Modified;
+            context.Entry(entity).State = EntityState.Modified;
+            await context.SaveChangesAsync();
+            return entity;
         }
     }
 }
