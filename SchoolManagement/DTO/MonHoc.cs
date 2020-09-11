@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SchoolManagement.Repository.Entity;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SchoolManagement.DTO
 {
-    public class MonHoc
+    public class MonHoc:IEntity
     {
         [Key]
         public int ID { get; set; }

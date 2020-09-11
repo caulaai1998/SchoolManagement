@@ -40,7 +40,7 @@ namespace SchoolManagement.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "DangKiMonHoc",
+                name: "DangKiMonHocs",
                 columns: table => new
                 {
                     ID = table.Column<int>(nullable: false)
@@ -52,15 +52,15 @@ namespace SchoolManagement.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_DangKiMonHoc", x => x.ID);
+                    table.PrimaryKey("PK_DangKiMonHocs", x => x.ID);
                     table.ForeignKey(
-                        name: "FK_DangKiMonHoc_MonHocs_MonHocID",
+                        name: "FK_DangKiMonHocs_MonHocs_MonHocID",
                         column: x => x.MonHocID,
                         principalTable: "MonHocs",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_DangKiMonHoc_SinhViens_SinhVienID",
+                        name: "FK_DangKiMonHocs_SinhViens_SinhVienID",
                         column: x => x.SinhVienID,
                         principalTable: "SinhViens",
                         principalColumn: "ID",
@@ -68,20 +68,20 @@ namespace SchoolManagement.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_DangKiMonHoc_MonHocID",
-                table: "DangKiMonHoc",
+                name: "IX_DangKiMonHocs_MonHocID",
+                table: "DangKiMonHocs",
                 column: "MonHocID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_DangKiMonHoc_SinhVienID",
-                table: "DangKiMonHoc",
+                name: "IX_DangKiMonHocs_SinhVienID",
+                table: "DangKiMonHocs",
                 column: "SinhVienID");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "DangKiMonHoc");
+                name: "DangKiMonHocs");
 
             migrationBuilder.DropTable(
                 name: "MonHocs");

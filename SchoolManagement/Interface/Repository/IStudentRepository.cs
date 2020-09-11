@@ -5,10 +5,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SchoolManagement.Repository
+namespace SchoolManagement.Interface.Repository
 {
     public interface IStudentRepository: IRepository<SinhVien>
     {
-       
+        Task<List<SinhVien>> GetAll(Filter filter);
     }
 }

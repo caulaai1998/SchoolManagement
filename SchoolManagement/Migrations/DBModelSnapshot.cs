@@ -39,7 +39,7 @@ namespace SchoolManagement.Migrations
 
                     b.HasIndex("SinhVienID");
 
-                    b.ToTable("DangKiMonHoc");
+                    b.ToTable("DangKiMonHocs");
                 });
 
             modelBuilder.Entity("SchoolManagement.DTO.MonHoc", b =>

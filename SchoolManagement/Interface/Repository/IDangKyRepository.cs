@@ -5,9 +5,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SchoolManagement.Repository
+namespace SchoolManagement.Interface.Repository
 {
-    public interface IDangKyRepository
+    public interface IDangKyRepository: IRepository<DangKiMonHoc>
     {
+        Task<List<DangKiMonHoc>> GetAll(Filter filter);
     }
 }

@@ -18,6 +18,7 @@ namespace SchoolManagement.DTO
 
         public DbSet<MonHoc> MonHocs { get; set; }
         public DbSet<SinhVien> SinhViens { get; set; }
+        public DbSet<DangKiMonHoc> DangKiMonHocs { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

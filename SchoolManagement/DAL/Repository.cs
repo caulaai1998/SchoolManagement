@@ -1,12 +1,13 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SchoolManagement.DTO;
+using SchoolManagement.Interface.Repository;
 using SchoolManagement.Repository.Entity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SchoolManagement.Repository
+namespace SchoolManagement.DAL
 {
     public class Repository<T, TContext> : IRepository<T>
         where T : class,IEntity
@@ -42,10 +43,6 @@ namespace SchoolManagement.Repository
             return await context.Set<T>().FindAsync(id);
         }
 
-        public async Task<List<T>> GetAll()
-        {
-            return await context.Set<T>().ToListAsync();
-        }
 
         public async Task<T> Update(T entity)
         {

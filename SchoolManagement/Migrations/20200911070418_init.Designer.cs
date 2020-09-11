@@ -10,7 +10,7 @@ using SchoolManagement.DTO;
 namespace SchoolManagement.Migrations
 {
     [DbContext(typeof(DB))]
-    [Migration("20200908010754_init")]
+    [Migration("20200911070418_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -41,7 +41,7 @@ namespace SchoolManagement.Migrations
 
                     b.HasIndex("SinhVienID");
 
-                    b.ToTable("DangKiMonHoc");
+                    b.ToTable("DangKiMonHocs");
                 });
 
             modelBuilder.Entity("SchoolManagement.DTO.MonHoc", b =>

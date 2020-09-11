@@ -6,12 +6,17 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using SchoolManagement.DAL;
 using SchoolManagement.DTO;
+using SchoolManagement.Interface.Repository;
+using SchoolManagement.Interface.UnitOfWork;
 using SchoolManagement.Repository;
 
 namespace SchoolManagement
@@ -36,7 +41,10 @@ namespace SchoolManagement
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddDbContext<DB>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-            services.AddScoped<StudentRepository>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<IStudentRepository, StudentRepository>();
+            services.AddScoped<IDangKyRepository, DangKyRepository>();
+            services.AddScoped<IMonHocRepository, MonHocRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

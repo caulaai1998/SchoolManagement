@@ -3,29 +3,27 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore.Query.ExpressionTranslators;
 using SchoolManagement.DAL;
 using SchoolManagement.DTO;
 using SchoolManagement.Interface.Repository;
 using SchoolManagement.Interface.UnitOfWork;
-using SchoolManagement.Repository;
-using SchoolManagement.ViewModel;
+
+// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace SchoolManagement.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class StudentController : MyMDBController<SinhVien,IStudentRepository>
+    public class DangKyController : MyMDBController<DangKiMonHoc, IDangKyRepository>
     {
-        IStudentRepository _repository;
-        public StudentController(IStudentRepository repository,IUnitOfWork unitOfWork):base(repository,unitOfWork)
+        IDangKyRepository _repository;
+        public DangKyController(IDangKyRepository repository, IUnitOfWork unitOfWork) : base(repository, unitOfWork)
         {
             _repository = repository;
         }
 
-     
         [HttpGet]
-        public Task<List<SinhVien>> Find([FromQuery]Filter filter)
+        public Task<List<DangKiMonHoc>> Find([FromQuery]Filter filter)
         {
             return _repository.GetAll(filter);
         }
